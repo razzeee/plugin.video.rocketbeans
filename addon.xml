@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.rocketbeans" version="1.0.0" name="Rocket Beans TV" provider-name="Razzeee">
     <requires>
-        <import addon="xbmc.python" version="2.14.0" />
+        <import addon="xbmc.python" version="2.25.0" />
         <import addon="plugin.video.youtube" version="5.2.1" />
         <import addon="script.module.routing" version="0.2.0"/>
     </requires>
@@ -9,8 +9,10 @@
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary lang="de_de">Rocket Beans TV | 24/7 Entertainment</summary>
-        <description lang="de_de">Rocket Beans TV ist Entertainment 24/7 zu digitalen Themen wie Filme, Games und Comedy.</description>
+        <summary lang="en_GB">Rocket Beans TV | 24/7 Entertainment</summary>
+        <summary lang="de_DE">Rocket Beans TV | 24/7 Entertainment</summary>
+        <description lang="en_GB">Rocket Beans TV is 24/7 Entertainment focusing on digital topics like movies, games and comedy.</description>
+        <description lang="de_DE">Rocket Beans TV ist Entertainment 24/7 zu digitalen Themen wie Filme, Games und Comedy.</description>
         <language>de</language>
         <platform>all</platform>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
