@@ -11,6 +11,7 @@ from resources.lib.guide import show_guide
 from resources.lib.youtube import get_live_video_id_from_channel_id
 from xbmcgui import ListItem
 from xbmcplugin import addDirectoryItem, endOfDirectory, setContent
+from xbmcaddon import Addon
 
 plugin = routing.Plugin()
 setContent(plugin.handle, 'videos')
@@ -19,7 +20,10 @@ setContent(plugin.handle, 'videos')
 @plugin.route('/')
 def index():
     video_id, title = get_live_video_id_from_channel_id(config.CHANNEL_ID)
-    url = "plugin://plugin.video.youtube/play/?video_id=%s" % video_id
+    if Addon().getSetting("stream") == "Twitch":
+        url = "plugin://plugin.video.twitch/?mode=play&channel_id=%s" % config.TWITCH_CHANNEL_ID
+    else:
+        url = "plugin://plugin.video.youtube/play/?video_id=%s" % video_id
     li = ListItem(label="Live | " + title,
                   thumbnailImage="https://i.ytimg.com/vi/%s/maxresdefault_live.jpg#%s" % (video_id, time.localtime()))
     li.setProperty('isPlayable', 'true')
@@ -32,6 +36,20 @@ def index():
     url = "plugin://plugin.video.youtube/channel/%s/" % config.LETS_PLAY_CHANNEL_ID
     addDirectoryItem(
         plugin.handle, url, ListItem('Let\'s-Play-Mediathek'), True)
+
+    addDirectoryItem(
+        plugin.handle,
+        "plugin://plugin.video.youtube/channel/%s/" % config.GAME_TWO_CHANNEL_ID,
+        ListItem("Game-Two-Mediathek"),
+        True 
+    )
+
+    addDirectoryItem(
+        plugin.handle,
+        "plugin://plugin.video.twitch/?mode=channel_video_list&broadcast_type=upload&channel_id=%s" %(config.TWITCH_CHANNEL_ID),
+        ListItem("Twitch-Mediathek"),
+        True
+    )
 
     addDirectoryItem(
         plugin.handle, plugin.url_for(guide), ListItem('Sendeplan'), True)
