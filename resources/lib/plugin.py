@@ -47,7 +47,7 @@ def index():
     addDirectoryItem(
         plugin.handle,
         "plugin://plugin.video.twitch/?mode=channel_video_list&broadcast_type=upload&channel_id=%s" %(config.TWITCH_CHANNEL_ID),
-        ListItem("Twitch-Mediathek"),
+        ListItem("Mediathek auf Twitch"),
         True
     )
 
