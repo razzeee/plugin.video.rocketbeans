@@ -1,4 +1,5 @@
 import re
+import HTMLParser
 import urllib2
 
 import xbmc
@@ -24,4 +25,4 @@ def get_live_video_id_from_channel_id(channel_id):
             re_video_title_match = re.search(re_video_title, line)
 
         if re_video_url_match and re_video_title_match:
-            return (re_video_url_match.group('video_id'), re_video_title_match.group('title'))
+            return (re_video_url_match.group('video_id'), HTMLParser.HTMLParser().unescape(re_video_title_match.group('title')))
