@@ -1,5 +1,6 @@
-from urllib2 import Request, urlopen
+import time
 from json import loads
+from urllib2 import Request, urlopen
 from resources.data.config import TWITCH_CLIENT_ID
 
 from base64 import b64decode
@@ -17,7 +18,8 @@ class TwitchStream:
         
         if len(payload) > 0:
             self.url = "plugin://plugin.video.twitch/?mode=play&channel_id=%s" %payload[0]["user_id"]
-            self.thumbnail = payload[0]["thumbnail_url"].format(height = "270", width = "480")
+            self.thumbnail = payload[0]["thumbnail_url"].format(
+                height="270", width="480") + '#%s' % time.localtime()
             self.title = payload[0]["title"]
         else:
             raise Exception("Failed to fetch stream information from Twitch.")
