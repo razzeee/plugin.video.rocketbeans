@@ -4,4 +4,5 @@ GAME_TWO_CHANNEL_ID = 'UCFBapHA35loZ3KZwT_z3BsQ'
 
 GUIDE_URL = 'http://api.rbtv.rodney.io/api/1.0/schedule/schedule_linear.json'
 
-TWITCH_CHANNEL_ID = '47627824'
+TWITCH_CHANNEL_ID = 'rocketbeanstv'
+TWITCH_CLIENT_ID = 'NjdlYnBmaHlvaWNhYjVrcjB5N3B6b2NzZm9oczd0eQ=='

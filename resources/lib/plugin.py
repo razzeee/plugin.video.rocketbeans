@@ -13,19 +13,23 @@ from xbmcgui import ListItem
 from xbmcplugin import addDirectoryItem, endOfDirectory, setContent
 from xbmcaddon import Addon
 
+from resources.lib.twitch import TwitchStream
+
 plugin = routing.Plugin()
 setContent(plugin.handle, 'videos')
 
 
 @plugin.route('/')
 def index():
-    video_id, title = get_live_video_id_from_channel_id(config.CHANNEL_ID)
     if Addon().getSetting("stream") == "Twitch":
-        url = "plugin://plugin.video.twitch/?mode=play&channel_id=%s" % config.TWITCH_CHANNEL_ID
+        t = TwitchStream(config.TWITCH_CHANNEL_ID)
+        url, title, thumbnail = t.url, t.title, t.thumbnail
     else:
+        video_id, title = get_live_video_id_from_channel_id(config.CHANNEL_ID)
         url = "plugin://plugin.video.youtube/play/?video_id=%s" % video_id
+        thumbnail = "https://i.ytimg.com/vi/%s/maxresdefault_live.jpg#%s" % (video_id, time.localtime())
     li = ListItem(label="Live | " + title,
-                  thumbnailImage="https://i.ytimg.com/vi/%s/maxresdefault_live.jpg#%s" % (video_id, time.localtime()))
+                  thumbnailImage=thumbnail)
     li.setProperty('isPlayable', 'true')
     li.setInfo(type=u'video', infoLabels={'title': title, 'plot': 'The live stream.'})
     addDirectoryItem(plugin.handle, url, li)
@@ -35,7 +39,7 @@ def index():
 
     url = "plugin://plugin.video.youtube/channel/%s/" % config.LETS_PLAY_CHANNEL_ID
     addDirectoryItem(
-        plugin.handle, url, ListItem('Let\'s-Play-Mediathek'), True)
+        plugin.handle, url, ListItem('Gaming Mediathek'), True)
 
     addDirectoryItem(
         plugin.handle,
