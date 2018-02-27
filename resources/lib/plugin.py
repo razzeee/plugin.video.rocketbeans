@@ -11,6 +11,9 @@ from resources.lib.guide import show_guide
 from resources.lib.youtube import get_live_video_id_from_channel_id
 from xbmcgui import ListItem
 from xbmcplugin import addDirectoryItem, endOfDirectory, setContent
+from xbmcaddon import Addon
+
+from resources.lib.twitch import TwitchStream
 
 plugin = routing.Plugin()
 setContent(plugin.handle, 'videos')
@@ -18,10 +21,15 @@ setContent(plugin.handle, 'videos')
 
 @plugin.route('/')
 def index():
-    video_id, title = get_live_video_id_from_channel_id(config.CHANNEL_ID)
-    url = "plugin://plugin.video.youtube/play/?video_id=%s" % video_id
+    if Addon().getSetting("stream") == "Twitch":
+        t = TwitchStream(config.TWITCH_CHANNEL_ID)
+        url, title, thumbnail = t.url, t.title, t.thumbnail
+    else:
+        video_id, title = get_live_video_id_from_channel_id(config.CHANNEL_ID)
+        url = "plugin://plugin.video.youtube/play/?video_id=%s" % video_id
+        thumbnail = "https://i.ytimg.com/vi/%s/maxresdefault_live.jpg#%s" % (video_id, time.localtime())
     li = ListItem(label="Live | " + title,
-                  thumbnailImage="https://i.ytimg.com/vi/%s/maxresdefault_live.jpg#%s" % (video_id, time.localtime()))
+                  thumbnailImage=thumbnail)
     li.setProperty('isPlayable', 'true')
     li.setInfo(type=u'video', infoLabels={'title': title, 'plot': 'The live stream.'})
     addDirectoryItem(plugin.handle, url, li)
@@ -31,7 +39,21 @@ def index():
 
     url = "plugin://plugin.video.youtube/channel/%s/" % config.LETS_PLAY_CHANNEL_ID
     addDirectoryItem(
-        plugin.handle, url, ListItem('Let\'s-Play-Mediathek'), True)
+        plugin.handle, url, ListItem('Gaming Mediathek'), True)
+
+    addDirectoryItem(
+        plugin.handle,
+        "plugin://plugin.video.youtube/channel/%s/" % config.GAME_TWO_CHANNEL_ID,
+        ListItem("Game-Two-Mediathek"),
+        True 
+    )
+
+    addDirectoryItem(
+        plugin.handle,
+        "plugin://plugin.video.twitch/?mode=channel_video_list&broadcast_type=upload&channel_id=%s" %(config.TWITCH_CHANNEL_ID),
+        ListItem("Mediathek auf Twitch"),
+        True
+    )
 
     addDirectoryItem(
         plugin.handle, plugin.url_for(guide), ListItem('Sendeplan'), True)
