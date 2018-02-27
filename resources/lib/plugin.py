@@ -22,7 +22,7 @@ setContent(plugin.handle, 'videos')
 @plugin.route('/')
 def index():
     if Addon().getSetting("stream") == "Twitch":
-        t = TwitchStream(config.TWITCH_CHANNEL_ID)
+        t = TwitchStream(config.TWITCH_USER_LOGIN)
         url, title, thumbnail = t.url, t.title, t.thumbnail
     else:
         video_id, title = get_live_video_id_from_channel_id(config.CHANNEL_ID)
