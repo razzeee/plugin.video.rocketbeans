@@ -32,6 +32,7 @@ Wir machen nur, auf was wir Bock haben – und das mit Erfolg! Egal ob spannende
         </assets>
         <news>- Read more data from the program plan, you can now even watch stuff on there 
 - Option to switch live stream source between youtube and twitch (thx truprecht)
-- Added twitch video library (thx truprecht)</news>
+- Added twitch video library (thx truprecht)
+- Added translations (german, english)</news>
     </extension>
 </addon>

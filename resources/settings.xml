@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-    <setting id="stream" type="select" label="Livestream Quelle" values="YouTube|Twitch" default="YouTube" />
+    <setting id="stream" type="select" label="32000" values="YouTube|Twitch" default="YouTube" />
 </settings>

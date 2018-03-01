@@ -17,8 +17,13 @@ setContent(plugin.handle, 'videos')
 livestream_thumbnail = None
 livestream_url = None
 
+__addon__ = Addon()
+
+def getString(string_id):
+    return __addon__.getLocalizedString(string_id).encode('utf-8', 'ignore')
+
 def get_livestream():
-    if Addon().getSetting("stream") == "Twitch":
+    if __addon__.getSetting("stream") == "Twitch":
         t = TwitchStream(config.TWITCH_USER_LOGIN)
         livestream_url, title, livestream_thumbnail = t.url, t.title, t.thumbnail
     else:
@@ -32,7 +37,7 @@ def index():
         ('Live | %s' % title),
         livestream_thumbnail,
         True,
-        'The live stream.',
+        getString(32001),
         0
     )
     addDirectoryItem(
@@ -45,7 +50,7 @@ def index():
     addDirectoryItem(
         plugin.handle,
         url,
-        ListItem('Mediathek'),
+        ListItem(getString(32007)),
         True
     )
 
@@ -53,28 +58,28 @@ def index():
     addDirectoryItem(
         plugin.handle, 
         url, 
-        ListItem('Gaming Mediathek'),
+        ListItem(getString(32006)),
         True
     )
 
     addDirectoryItem(
         plugin.handle,
         "plugin://plugin.video.youtube/channel/%s/" % config.GAME_TWO_CHANNEL_ID,
-        ListItem("Game-Two-Mediathek"),
+        ListItem(getString(32005)),
         True 
     )
 
     addDirectoryItem(
         plugin.handle,
         "plugin://plugin.video.twitch/?mode=channel_video_list&broadcast_type=upload&channel_id=%s" %(config.TWITCH_CHANNEL_ID),
-        ListItem("Mediathek auf Twitch"),
+        ListItem(getString(32004)),
         True
     )
 
     addDirectoryItem(
         plugin.handle,
         plugin.url_for(guide),
-        ListItem('Sendeplan'),
+        ListItem(getString(32003)),
         True
     )
 
@@ -96,7 +101,7 @@ def guide():
                 title,
                 thumbnail,
                 True,
-                '[B]Game[/B]: ' + game if game else '',
+                '[B]' + getString(32002), +'[/B]: ' + game if game else '',
                 duration
             )
             addDirectoryItem(
@@ -111,7 +116,7 @@ def guide():
                     title,
                     livestream_thumbnail,
                     True,
-                    'The live stream.',
+                    getString(32001),
                     0
                 )
                 addDirectoryItem(
