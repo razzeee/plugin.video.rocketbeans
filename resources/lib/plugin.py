@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import routing
 
 from resources.data import config
@@ -101,7 +100,7 @@ def guide():
                 title,
                 thumbnail,
                 True,
-                '[B]' + getString(32002), +'[/B]: ' + game if game else '',
+                '[B]' + getString(32002) +'[/B]: ' + game if game else '',
                 duration
             )
             addDirectoryItem(
