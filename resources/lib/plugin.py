@@ -70,6 +70,13 @@ def index():
 
     addDirectoryItem(
         plugin.handle,
+        "plugin://plugin.video.youtube/channel/%s/" % config.HAENGI_HQ_CHANNEL_ID,
+        ListItem(getString(32008)),
+        True 
+    )
+
+    addDirectoryItem(
+        plugin.handle,
         "plugin://plugin.video.twitch/?mode=channel_video_list&broadcast_type=upload&channel_id=%s" %(config.TWITCH_CHANNEL_ID),
         ListItem(getString(32004)),
         True
