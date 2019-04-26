@@ -19,7 +19,8 @@ Auf YouTube senden die Beans 24 Stunden am Tag und versorgen euch mit geilem Con
 
 Wir machen nur, auf was wir Bock haben – und das mit Erfolg! Egal ob spannende Let’s Plays, interaktive Formate wie „Chat Duell“, unser Kinomagazin „Kino+“ oder exklusive Events: Mit unseren ehemaligen Game One-Moderatoren Budi, Etienne, Nils und Simon, dem fantastischen Einsatz unseres hochmotivierten Raketenteams und dem beispiellosen Support unserer Bohnen-Community liefern wir euch bestes TV-Entertainment abseits ausgetretener Pfade – spontan, authentisch und unabhängig.</description>
         <language>de</language>
-        <disclaimer>Make sure to enable MPEG-DASH in your YouTube addon</disclaimer>
+        <disclaimer lang="en_GB">Make sure to enable MPEG-DASH in your YouTube addon</disclaimer>
+        <disclaimer lang="de_DE">Bitte aktiviere den MPEG-DASH Support im YouTube addon</disclaimer>
         <platform>all</platform>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
         <website>www.rocketbeans.tv</website>
