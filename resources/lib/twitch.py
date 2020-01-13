@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from json import loads
-from urllib2 import Request, urlopen
+from urllib.request import Request, urlopen
 from resources.data.config import TWITCH_CLIENT_ID
 
 from base64 import b64decode

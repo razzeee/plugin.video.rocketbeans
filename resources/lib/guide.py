@@ -2,7 +2,9 @@
 import datetime
 import json
 import time
-import urllib2
+import urllib.request
+import urllib.error
+import urllib.parse
 
 from resources.data import config
 
@@ -10,8 +12,10 @@ from resources.data import config
 def show_guide():
     items = []
 
-    request = urllib2.Request(config.GUIDE_URL, headers={'User-Agent': 'Kodi'})
-    response = urllib2.urlopen(request)
+    request = urllib.request.Request(
+        config.GUIDE_URL, headers={'User-Agent': 'Kodi'})
+
+    response = urllib.request.urlopen(request)
     string_data = response.read()
 
     data = json.loads(string_data)
@@ -35,7 +39,8 @@ def show_guide():
         if cur_date is None:
             cur_date = startTime.date()
         elif (startTime.date() - cur_date).days != 0:
-            items.append((startTime.strftime('--- %A, %d. %B ---'), '', '', '', ''))
+            items.append(
+                (startTime.strftime('--- %A, %d. %B ---'), '', '', '', ''))
             cur_date = startTime.date()
 
         if startTime < datetime.datetime.now() < endTime:

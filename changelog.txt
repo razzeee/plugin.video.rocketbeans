@@ -1,3 +1,10 @@
+v1.2.1
+- Readded guide
+
+v1.2.0
+- Update to python 3
+- Removed guide
+
 v1.1.4
 - Improved live channel name parsing
 

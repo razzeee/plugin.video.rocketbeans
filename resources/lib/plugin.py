@@ -18,16 +18,20 @@ livestream_url = None
 
 __addon__ = Addon()
 
+
 def getString(string_id):
     return __addon__.getLocalizedString(string_id).encode('utf-8', 'ignore')
+
 
 def get_livestream():
     if __addon__.getSetting("stream") == 0:
         t = TwitchStream(config.TWITCH_USER_LOGIN)
         livestream_url, title, livestream_thumbnail = t.url, t.title, t.thumbnail
     else:
-        livestream_url, title, livestream_thumbnail = YoutubeStream().get_live_video_info_from_channel_id(config.CHANNEL_ID)
+        livestream_url, title, livestream_thumbnail = YoutubeStream(
+        ).get_live_video_info_from_channel_id(config.CHANNEL_ID)
     return livestream_url, livestream_thumbnail, title
+
 
 @plugin.route('/')
 def index():
@@ -55,15 +59,15 @@ def index():
 
     url = "plugin://plugin.video.youtube/channel/%s/" % config.LETS_PLAY_CHANNEL_ID
     addDirectoryItem(
-        plugin.handle, 
-        url, 
+        plugin.handle,
+        url,
         ListItem(getString(32006)),
         True
     )
 
     addDirectoryItem(
-        plugin.handle, 
-        "plugin://plugin.video.youtube/channel/%s/" % config.KINO_PLUS_CHANNEL_ID, 
+        plugin.handle,
+        "plugin://plugin.video.youtube/channel/%s/" % config.KINO_PLUS_CHANNEL_ID,
         ListItem(getString(32009)),
         True
     )
@@ -72,12 +76,12 @@ def index():
         plugin.handle,
         "plugin://plugin.video.youtube/channel/%s/" % config.GAME_TWO_CHANNEL_ID,
         ListItem(getString(32005)),
-        True 
+        True
     )
 
     addDirectoryItem(
-        plugin.handle, 
-        "plugin://plugin.video.youtube/channel/%s/" % config.KINO_PLUS_CHANNEL_ID, 
+        plugin.handle,
+        "plugin://plugin.video.youtube/channel/%s/" % config.KINO_PLUS_CHANNEL_ID,
         ListItem(getString(32009)),
         True
     )
@@ -86,12 +90,13 @@ def index():
         plugin.handle,
         "plugin://plugin.video.youtube/channel/%s/" % config.HAENGI_HQ_CHANNEL_ID,
         ListItem(getString(32008)),
-        True 
+        True
     )
 
     addDirectoryItem(
         plugin.handle,
-        "plugin://plugin.video.twitch/?mode=channel_video_list&broadcast_type=upload&channel_id=%s" %(config.TWITCH_CHANNEL_ID),
+        "plugin://plugin.video.twitch/?mode=channel_video_list&broadcast_type=upload&channel_id=%s" % (
+            config.TWITCH_CHANNEL_ID),
         ListItem(getString(32004)),
         True
     )
@@ -121,7 +126,8 @@ def guide():
                 title,
                 thumbnail,
                 True,
-                '[B]' + getString(32002) +'[/B]: ' + game if game else '',
+                '[B]' + str(getString(32002)) + '[/B]: ' +
+                game if game else '',
                 duration
             )
             addDirectoryItem(
@@ -159,12 +165,13 @@ def guide():
                 )
     endOfDirectory(plugin.handle)
 
+
 def createListItem(label, thumbnailImage, isPlayable, plot, duration):
     li = ListItem(
         label=label,
         thumbnailImage=thumbnailImage
     )
-        
+
     if isPlayable:
         infoLabels = {}
         infoLabels['plot'] = plot
@@ -172,10 +179,11 @@ def createListItem(label, thumbnailImage, isPlayable, plot, duration):
         if duration > 0:
             infoLabels['duration'] = duration
 
-        li.setInfo(type=u'video', infoLabels=infoLabels)
+        li.setInfo(type='video', infoLabels=infoLabels)
         li.setProperty('isPlayable', 'true')
 
     return li
+
 
 def run():
     plugin.run()
