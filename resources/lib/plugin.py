@@ -171,7 +171,7 @@ def createListItem(label, thumbnailImage, isPlayable, plot, duration):
         label=label,
     )
 
-    li.setArt('thumb', thumbnailImage)
+    li.setArt({'thumb': thumbnailImage})
 
     if isPlayable:
         infoLabels = {}
