@@ -8,7 +8,13 @@ import urllib2
 class YoutubeStream:
     def get_live_video_info_from_channel_id(self, channel_id):
         request = urllib2.Request("https://www.youtube.com/c/%s/live" % channel_id)
-        video_id, title = self.get_video_info(request)
+        if not self.get_video_info(request):
+                # 3gcc1Bf5h5w -> Channel opening VideoID
+                video_id = "3gcc1Bf5h5w"
+                title = "Sorry. No Livestream atm!"
+        else:
+                video_id, title = self.get_video_info(request)
+
         livestream_url = "plugin://plugin.video.youtube/play/?video_id=%s" % video_id
         livestream_thumbnail = "https://i.ytimg.com/vi/%s/hqdefault_live.jpg#%s" % (
             video_id, time.localtime())
