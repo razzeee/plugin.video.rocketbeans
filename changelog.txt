@@ -1,3 +1,8 @@
+v1.2.4
+- Fixed error with Livestream not existing
+- Reordered channels
+- Fix game string
+
 v1.2.3
 - More python 3.9 and kodi deprecation fixes
 
